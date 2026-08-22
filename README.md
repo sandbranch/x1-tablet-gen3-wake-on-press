@@ -9,7 +9,7 @@ and the negative one is probably the more useful.
 | **Wake the machine from sleep by touching the sensor** | ❌ **not possible from userspace** |
 
 This repository is a findings write-up. The code that implements the working half lives in
-**[x1-tablet-gen3-fingerprint](../x1-tablet-gen3-fingerprint)** (`synaspi/wake.py`).
+**[x1-tablet-gen3-fingerprint](https://github.com/sandbranch/x1-tablet-gen3-fingerprint)** (`synaspi/wake.py`).
 
 ---
 
@@ -36,7 +36,7 @@ an ordinary fprintd unlock, not touch-to-wake.
 ### Combined with folio wake, the result is quite pleasant
 
 With S3 and lid wake in place (see
-**[x1-tablet-gen3-wake-on-open](../x1-tablet-gen3-wake-on-open)**), the whole sequence
+**[x1-tablet-gen3-wake-on-open](https://github.com/sandbranch/x1-tablet-gen3-wake-on-open)**), the whole sequence
 needs no deliberate interaction at all:
 
 1. Open the folio → machine wakes from S3
@@ -130,7 +130,7 @@ In order, and note that the small kernel patch is **not** the hard part:
 2. **A thin kernel shim (~150 lines)** that binds `SYNA8002`, takes the already-declared
    IRQ and calls `enable_irq_wake()`. Genuinely small — *once step 1 exists*.
 3. **For S3 specifically, a `_PRW`.** This could be added with an additive SSDT, exactly
-   the technique used in [x1-tablet-gen3-s3-sleep](../x1-tablet-gen3-s3-sleep). But
+   the technique used in [x1-tablet-gen3-s3-sleep](https://github.com/sandbranch/x1-tablet-gen3-s3-sleep). But
    `_PRW` must name a GPE that the silicon actually routes this pad to. Lenovo omitted
    `_PRW` here while using it **53 times** elsewhere in the same DSDT, which is a strong
    hint the pad was never wired for wake. Software cannot invent a routing that hardware
@@ -162,9 +162,9 @@ If you have wake notes that predate your S3 work, re-measure before relying on t
 
 ## Prerequisites
 
-* The fingerprint driver itself — **[x1-tablet-gen3-fingerprint](../x1-tablet-gen3-fingerprint)**.
+* The fingerprint driver itself — **[x1-tablet-gen3-fingerprint](https://github.com/sandbranch/x1-tablet-gen3-fingerprint)**.
   There is no in-tree Linux driver for this sensor (Synaptics SYNA8002 over SPI).
-* For the folio-wake combination, S3 — **[x1-tablet-gen3-s3-sleep](../x1-tablet-gen3-s3-sleep)**.
+* For the folio-wake combination, S3 — **[x1-tablet-gen3-s3-sleep](https://github.com/sandbranch/x1-tablet-gen3-s3-sleep)**.
 
 ## License
 
